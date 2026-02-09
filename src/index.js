@@ -4,10 +4,12 @@ const { ConnectionManager } = require('./utils/connection');
 const { ArbitrageStrategy } = require('./strategies/arbitrage');
 
 const PAPER_TRADING = process.argv.includes('--paper');
+const SINGLE_RUN = process.argv.includes('--single'); // Run once, exit
 
 async function main() {
   console.log('🤖 Solana Trading Bot v0.1.0');
   console.log(PAPER_TRADING ? '📄 PAPER TRADING MODE' : '💰 LIVE TRADING MODE');
+  console.log(SINGLE_RUN ? '▶️  SINGLE RUN MODE' : '🔄 LOOP MODE');
   console.log('─'.repeat(50));
 
   // Load wallet
@@ -45,18 +47,49 @@ async function main() {
     })
   };
 
-  // Main loop
+  // Single run mode (for containers/cron)
+  if (SINGLE_RUN) {
+    console.log('\n🔍 Running single scan...');
+    console.log('─'.repeat(50));
+
+    try {
+      const opportunities = await strategies.arbitrage.findArbitrageOpportunities();
+      
+      if (opportunities.length > 0) {
+        console.log(`✅ Found ${opportunities.length} opportunities`);
+        // Log to TRADING.md
+        logOpportunity(opportunities);
+      } else {
+        console.log('⏸️  No opportunities found');
+      }
+    } catch (error) {
+      console.error('❌ Strategy error:', error.message);
+    }
+
+    console.log('\n👋 Single run complete');
+    process.exit(0);
+  }
+
+  // Loop mode
   console.log('\n🚀 Starting trading loop...');
   console.log('─'.repeat(50));
 
   let iterations = 0;
-  const maxIterations = PAPER_TRADING ? 10 : Infinity;
+  const maxIterations = PAPER_TRADING ? 3 : 100; // Limit for container safety
+  const startTime = Date.now();
+  const maxRuntime = 30000; // 30 seconds max in containers
 
   while (iterations < maxIterations) {
     iterations++;
-    console.log(`\n📊 Iteration ${iterations}`);
+    console.log(`\n📊 Iteration ${iterations}/${maxIterations}`);
 
     try {
+      // Check runtime limit
+      if (Date.now() - startTime > maxRuntime) {
+        console.log('⏰ Runtime limit reached, exiting gracefully');
+        break;
+      }
+
       // Run arbitrage strategy
       const opportunities = await strategies.arbitrage.findArbitrageOpportunities();
       
@@ -78,13 +111,20 @@ async function main() {
       console.error('❌ Strategy error:', error.message);
     }
 
-    // Wait before next iteration
+    // Wait before next iteration (shorter in containers)
     if (iterations < maxIterations) {
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      await new Promise(resolve => setTimeout(resolve, 2000)); // 2s instead of 5s
     }
   }
 
   console.log('\n👋 Bot stopped');
+  process.exit(0); // Ensure clean exit
+}
+
+function logOpportunity(opportunities) {
+  // Simple logging for now - could write to TRADING.md
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] ${opportunities.length} opportunities detected`);
 }
 
 // Handle shutdown gracefully
