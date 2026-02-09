@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node src/index.js",
     "paper": "node src/index.js --paper",
+    "daemon": "node src/daemon.js",
+    "relay": "node src/telegram-relay.js",
+    "start:all": "npm run daemon & npm run relay",
     "test": "jest"
   },
   "dependencies": {
