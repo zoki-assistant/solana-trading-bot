@@ -94,10 +94,10 @@ class TradingDaemon {
     this.connection.connect();
     this.log('INFO', 'Connected to Solana mainnet');
 
-    // Initialize strategies
+    // Initialize strategies - LEARNING MODE (lower threshold)
     this.strategies.arbitrage = new ArbitrageStrategy({
-      minProfitPercent: 0.5,
-      tradeSize: 0.1
+      minProfitPercent: 0.1,  // Lowered from 0.5% for learning
+      tradeSize: 0.05         // Smaller size for learning
     });
 
     // Load previous state
