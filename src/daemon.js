@@ -96,7 +96,7 @@ class TradingDaemon {
 
     // Initialize strategies - LEARNING MODE (lower threshold)
     this.strategies.arbitrage = new ArbitrageStrategy({
-      minProfitPercent: 0.1,  // Lowered from 0.5% for learning
+      minProfitPercent: 0.05,  // Lowered to see more opportunities (test mode)
       tradeSize: 0.05         // Smaller size for learning
     });
 
