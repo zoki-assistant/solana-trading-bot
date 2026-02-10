@@ -1,20 +1,20 @@
-// Learning-focused arbitrage strategy - reports all price movements
+// Learning-focused arbitrage strategy - uses CoinGecko for price data
 const axios = require('axios');
 
 class ArbitrageStrategy {
   constructor(config = {}) {
-    this.minProfitPercent = config.minProfitPercent || 0.1; // 0.1% for learning (was 0.5%)
-    this.tradeSize = config.tradeSize || 0.05; // 0.05 SOL per trade (smaller for learning)
-    this.tokens = config.tokens || ['SOL', 'USDC', 'USDT'];
-    this.priceHistory = {}; // Track prices for learning
+    this.minProfitPercent = config.minProfitPercent || 0.1;
+    this.tradeSize = config.tradeSize || 0.05;
+    this.priceHistory = {};
   }
 
-  async getJupiterPrice(inputMint, outputMint, amount) {
+  async getCoinGeckoPrice(coinId) {
     try {
-      const url = `https://quote-api.jup.ag/v6/quote?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amount}&slippageBps=50`;
-      const response = await axios.get(url, { timeout: 5000 });
-      return response.data;
+      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd&include_24hr_change=true`;
+      const response = await axios.get(url, { timeout: 10000 });
+      return response.data[coinId];
     } catch (error) {
+      console.error(`  ❌ CoinGecko error for ${coinId}:`, error.message);
       return null;
     }
   }
@@ -22,81 +22,60 @@ class ArbitrageStrategy {
   async findArbitrageOpportunities() {
     const opportunities = [];
     const timestamp = new Date().toISOString();
-    
-    // Token mints
-    const mints = {
-      'SOL': 'So11111111111111111111111111111111111111112',
-      'USDC': 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
-      'USDT': 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB'
-    };
 
-    console.log('🔍 Scanning markets...');
+    console.log('🔍 Scanning markets (CoinGecko)...');
 
-    // Get SOL -> USDC price
-    const amount = this.tradeSize * 1e9;
-    const quote = await this.getJupiterPrice(mints.SOL, mints.USDC, amount);
-    
-    if (quote) {
-      const outAmount = quote.outAmount / 1e6;
-      const price = outAmount / this.tradeSize;
-      
-      // Store in history
+    // Get SOL price
+    const solData = await this.getCoinGeckoPrice('solana');
+    const usdcData = await this.getCoinGeckoPrice('usd-coin');
+    const usdtData = await this.getCoinGeckoPrice('tether');
+
+    if (solData && usdcData) {
+      // Calculate implied SOL/USDC rate
+      const solPrice = solData.usd;
+      const usdcPrice = usdcData.usd;
+      const impliedRate = solPrice / usdcPrice;
+
       const pair = 'SOL/USDC';
-      const prevPrice = this.priceHistory[pair];
-      this.priceHistory[pair] = price;
-      
-      // Calculate change if we have history
+      const prevRate = this.priceHistory[pair];
+      this.priceHistory[pair] = impliedRate;
+
       let changePct = 0;
-      if (prevPrice) {
-        changePct = ((price - prevPrice) / prevPrice) * 100;
+      if (prevRate) {
+        changePct = ((impliedRate - prevRate) / prevRate) * 100;
       }
-      
-      // Log every scan for learning
-      console.log(`  SOL/USDC: ${price.toFixed(4)} (${changePct >= 0 ? '+' : ''}${changePct.toFixed(3)}%)`);
-      
-      // Report opportunity if profit exceeds threshold (accounting for fees ~0.15%)
-      // Jupiter: 0.1% platform fee + slippage
-      const effectiveProfit = Math.abs(changePct) - 0.15; // Net after fees
-      
-      if (effectiveProfit > this.minProfitPercent) {
-        const opportunity = {
+
+      console.log(`  SOL/USDC: ${impliedRate.toFixed(4)} (${changePct >= 0 ? '+' : ''}${changePct.toFixed(3)}%)`);
+      console.log(`    SOL: $${solPrice.toFixed(2)} (24h: ${solData.usd_24h_change?.toFixed(2) || 0}%)`);
+
+      // Check for opportunity
+      const effectiveProfit = Math.abs(changePct) - 0.15;
+      if (effectiveProfit > this.minProfitPercent && Math.abs(changePct) > 0) {
+        opportunities.push({
           timestamp,
           pair,
           direction: changePct > 0 ? 'up' : 'down',
           priceChange: changePct,
           effectiveProfit,
-          currentPrice: price,
+          currentPrice: impliedRate,
+          solPrice,
           tradeSize: this.tradeSize,
-          potentialProfit: this.tradeSize * (effectiveProfit / 100),
-          route: quote.routePlan ? 'Jupiter V6' : 'Unknown',
-          marketImpact: quote.priceImpactPct || 'unknown'
-        };
-        
-        opportunities.push(opportunity);
+          potentialProfit: this.tradeSize * solPrice * (effectiveProfit / 100),
+          source: 'CoinGecko'
+        });
         console.log(`  ✅ OPPORTUNITY: ${effectiveProfit.toFixed(2)}% net profit`);
       }
     }
 
-    // Also check SOL -> USDT for comparison
-    const quoteUSDT = await this.getJupiterPrice(mints.SOL, mints.USDT, amount);
-    if (quoteUSDT) {
-      const outAmountUSDT = quoteUSDT.outAmount / 1e6;
-      const priceUSDT = outAmountUSDT / this.tradeSize;
-      const pairUSDT = 'SOL/USDT';
-      const prevPriceUSDT = this.priceHistory[pairUSDT];
-      this.priceHistory[pairUSDT] = priceUSDT;
-      
-      let changePctUSDT = 0;
-      if (prevPriceUSDT) {
-        changePctUSDT = ((priceUSDT - prevPriceUSDT) / prevPriceUSDT) * 100;
-      }
-      
-      console.log(`  SOL/USDT: ${priceUSDT.toFixed(4)} (${changePctUSDT >= 0 ? '+' : ''}${changePctUSDT.toFixed(3)}%)`);
-      
-      // Check for triangular arb: USDC -> USDT -> SOL
-      if (prevPrice && prevPriceUSDT) {
-        const usdcUsdtRate = price / priceUSDT;
-        console.log(`  Implied USDC/USDT: ${usdcUsdtRate.toFixed(6)}`);
+    // Compare USDC/USDT for stablecoin arbitrage
+    if (usdcData && usdtData) {
+      const usdcPrice = usdcData.usd;
+      const usdtPrice = usdtData.usd;
+      const spread = ((usdcPrice - usdtPrice) / usdtPrice) * 100;
+      console.log(`  USDC/USDT spread: ${spread.toFixed(4)}%`);
+
+      if (Math.abs(spread) > 0.05) {
+        console.log(`  ⚠️  Stablecoin arbitrage possible: ${spread.toFixed(3)}%`);
       }
     }
 
@@ -104,16 +83,13 @@ class ArbitrageStrategy {
   }
 
   async execute(opportunity) {
-    // Learning mode: Don't execute, just log and alert
-    console.log('📊 Learning mode - opportunity detected but not executed');
+    console.log('📊 Learning mode - opportunity detected');
     console.log('  Details:', JSON.stringify(opportunity, null, 2));
-    
-    // Return as if executed for logging purposes
-    return { 
-      success: true, // Pretend success for learning
+    return {
+      success: true,
       paperTrade: true,
       opportunity,
-      note: 'Paper trade - no real execution'
+      note: 'Paper trade - Jupiter API unavailable, using CoinGecko'
     };
   }
 }
