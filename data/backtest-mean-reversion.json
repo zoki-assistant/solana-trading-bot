@@ -1,0 +1,531 @@
+{
+  "timestamp": "2026-02-10T09:29:14.879Z",
+  "dataPoints": 541,
+  "strategies": [
+    {
+      "name": "Conservative (2σ bands + RSI)",
+      "config": {
+        "name": "Conservative (2σ bands + RSI)",
+        "stdDevMultiplier": 2,
+        "rsiOversold": 30,
+        "rsiOverbought": 70,
+        "stopLossPct": 3,
+        "takeProfitPct": 2,
+        "maxHoldPeriods": 12
+      },
+      "capital": 44.354804951068,
+      "trades": [
+        {
+          "type": "LONG",
+          "entry": 91745,
+          "exit": 88888,
+          "pnl": -1.4519341697095207,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 12,
+          "timestamp": "2025-11-19T16:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 88888,
+          "exit": 91554,
+          "pnl": 1.2953470204319366,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 1,
+          "timestamp": "2025-11-19T20:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 86936,
+          "exit": 84030,
+          "pnl": -1.5511094861946373,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 3,
+          "timestamp": "2025-11-21T04:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 84030,
+          "exit": 86295,
+          "pnl": 1.1546192094160184,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 11,
+          "timestamp": "2025-11-23T00:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 86314,
+          "exit": 90800,
+          "pnl": 2.311110052129084,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 9,
+          "timestamp": "2025-12-02T12:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 86143,
+          "exit": 87939,
+          "pnl": 0.9524483897775541,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 5,
+          "timestamp": "2025-12-16T12:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 92844,
+          "exit": 92153,
+          "pnl": 0.32482407338902164,
+          "exitReason": "MEAN_REVERSION",
+          "holdPeriods": 10,
+          "timestamp": "2026-01-06T16:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 94176,
+          "exit": 97241,
+          "pnl": -1.6118569453664306,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 6,
+          "timestamp": "2026-01-14T16:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 97241,
+          "exit": 94608,
+          "pnl": 1.238462805228653,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 11,
+          "timestamp": "2026-01-16T12:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 91122,
+          "exit": 89764,
+          "pnl": -0.7509585726537638,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 12,
+          "timestamp": "2026-01-22T04:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 86449,
+          "exit": 88299,
+          "pnl": 0.9814941615690501,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 7,
+          "timestamp": "2026-01-26T20:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 84911,
+          "exit": 81269,
+          "pnl": -2.107576865753529,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 12,
+          "timestamp": "2026-01-31T12:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 77730,
+          "exit": 78283,
+          "pnl": 0.29727800612084065,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 12,
+          "timestamp": "2026-02-02T16:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 74897,
+          "exit": 76672,
+          "pnl": 1.0724082578597443,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 2,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 74092,
+          "exit": 71202,
+          "pnl": -1.8918440246762493,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 3,
+          "timestamp": "2026-02-05T00:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 71202,
+          "exit": 67465,
+          "pnl": -2.4384859100284833,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 3,
+          "timestamp": "2026-02-05T12:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 67465,
+          "exit": 65235,
+          "pnl": -1.4694210504712795,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 1,
+          "timestamp": "2026-02-05T16:00:00.000Z"
+        }
+      ],
+      "wins": 9,
+      "losses": 8,
+      "winRate": 52.94117647058824,
+      "totalReturn": -7.594156351941672,
+      "profitFactor": 0.7253715296781094,
+      "avgHold": 7.0588235294117645,
+      "skippedSignals": 3
+    },
+    {
+      "name": "Aggressive (1.5σ bands)",
+      "config": {
+        "name": "Aggressive (1.5σ bands)",
+        "stdDevMultiplier": 1.5,
+        "rsiOversold": 35,
+        "rsiOverbought": 65,
+        "stopLossPct": 2.5,
+        "takeProfitPct": 1.5,
+        "maxHoldPeriods": 8
+      },
+      "capital": 40.68944800727462,
+      "trades": [
+        {
+          "type": "LONG",
+          "entry": 94013,
+          "exit": 90872,
+          "pnl": -1.5554284509589096,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 3,
+          "timestamp": "2025-11-18T00:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 90872,
+          "exit": 92943,
+          "pnl": 0.9746757241922805,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 3,
+          "timestamp": "2025-11-18T12:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 89939,
+          "exit": 91554,
+          "pnl": 0.7773809108553679,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 2,
+          "timestamp": "2025-11-19T20:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 86936,
+          "exit": 84030,
+          "pnl": -1.5625609195604668,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 3,
+          "timestamp": "2025-11-21T04:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 84030,
+          "exit": 84245,
+          "pnl": 0.08234081746687402,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 8,
+          "timestamp": "2025-11-22T12:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 91049,
+          "exit": 91418,
+          "pnl": -0.21093040607126592,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 8,
+          "timestamp": "2025-11-28T08:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 86314,
+          "exit": 87325,
+          "pnl": 0.4865586921792699,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 8,
+          "timestamp": "2025-12-02T08:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 93757,
+          "exit": 92085,
+          "pnl": 0.7648737913098951,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 4,
+          "timestamp": "2025-12-10T08:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 88608,
+          "exit": 86143,
+          "pnl": -1.2938875476508898,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 6,
+          "timestamp": "2025-12-15T16:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 86143,
+          "exit": 87939,
+          "pnl": 0.8893766239379477,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 5,
+          "timestamp": "2025-12-16T12:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 89909,
+          "exit": 88014,
+          "pnl": 0.9166488467256028,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 2,
+          "timestamp": "2025-12-22T16:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 90109,
+          "exit": 87527,
+          "pnl": 1.2818558271837284,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 2,
+          "timestamp": "2025-12-29T08:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 89849,
+          "exit": 91190,
+          "pnl": -0.7355231553007936,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 8,
+          "timestamp": "2026-01-04T00:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 91190,
+          "exit": 93114,
+          "pnl": -1.0109111035467775,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 8,
+          "timestamp": "2026-01-05T08:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 93114,
+          "exit": 92153,
+          "pnl": 0.4369160285807445,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 8,
+          "timestamp": "2026-01-06T16:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 93434,
+          "exit": 96737,
+          "pnl": -1.6521998790331685,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 6,
+          "timestamp": "2026-01-14T12:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 96737,
+          "exit": 95588,
+          "pnl": 0.4947159674781042,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 8,
+          "timestamp": "2026-01-15T20:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 92682,
+          "exit": 91162,
+          "pnl": -0.7648853199629616,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 8,
+          "timestamp": "2026-01-20T08:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 91162,
+          "exit": 88404,
+          "pnl": -1.3620635815682764,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 3,
+          "timestamp": "2026-01-20T20:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 88404,
+          "exit": 90230,
+          "pnl": 0.8522676249989192,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 4,
+          "timestamp": "2026-01-21T12:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 88525,
+          "exit": 87968,
+          "pnl": -0.3042835103100815,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 8,
+          "timestamp": "2026-01-26T16:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 84911,
+          "exit": 82641,
+          "pnl": -1.1859578847565206,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 3,
+          "timestamp": "2026-01-30T00:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 82641,
+          "exit": 84216,
+          "pnl": 0.7729416017828029,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 4,
+          "timestamp": "2026-01-30T16:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 77730,
+          "exit": 76248,
+          "pnl": -0.846722460091553,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 8,
+          "timestamp": "2026-02-02T00:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 76248,
+          "exit": 77718,
+          "pnl": 0.7809381243070429,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 2,
+          "timestamp": "2026-02-02T08:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 74897,
+          "exit": 76672,
+          "pnl": 0.9837874408171721,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 2,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 74092,
+          "exit": 71202,
+          "pnl": -1.7355073292478513,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 3,
+          "timestamp": "2026-02-05T00:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 71202,
+          "exit": 67465,
+          "pnl": -2.2369762591005733,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 3,
+          "timestamp": "2026-02-05T12:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 67465,
+          "exit": 65235,
+          "pnl": -1.3479922073810477,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 1,
+          "timestamp": "2026-02-05T16:00:00.000Z"
+        }
+      ],
+      "wins": 14,
+      "losses": 15,
+      "winRate": 48.275862068965516,
+      "totalReturn": -15.230316651511208,
+      "profitFactor": 0.5894293056400505,
+      "avgHold": 4.862068965517241,
+      "skippedSignals": 12
+    },
+    {
+      "name": "Wide Bands (2.5σ + Extreme RSI)",
+      "config": {
+        "name": "Wide Bands (2.5σ + Extreme RSI)",
+        "stdDevMultiplier": 2.5,
+        "rsiOversold": 25,
+        "rsiOverbought": 75,
+        "stopLossPct": 4,
+        "takeProfitPct": 3,
+        "maxHoldPeriods": 16
+      },
+      "capital": 44.94359237887132,
+      "trades": [
+        {
+          "type": "LONG",
+          "entry": 84645,
+          "exit": 87325,
+          "pnl": 1.4118510437710436,
+          "exitReason": "TAKE_PROFIT",
+          "holdPeriods": 5,
+          "timestamp": "2025-12-02T08:00:00.000Z"
+        },
+        {
+          "type": "SHORT",
+          "entry": 95374,
+          "exit": 94608,
+          "pnl": 0.3441516670517002,
+          "exitReason": "MAX_HOLD",
+          "holdPeriods": 16,
+          "timestamp": "2026-01-16T12:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 86449,
+          "exit": 88751,
+          "pnl": 1.2255896556026888,
+          "exitReason": "MEAN_REVERSION",
+          "holdPeriods": 8,
+          "timestamp": "2026-01-27T00:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 83995,
+          "exit": 77730,
+          "pnl": -3.646376029557312,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 12,
+          "timestamp": "2026-01-31T16:00:00.000Z"
+        },
+        {
+          "type": "LONG",
+          "entry": 71202,
+          "exit": 67465,
+          "pnl": -2.3916239579967997,
+          "exitReason": "STOP_LOSS",
+          "holdPeriods": 3,
+          "timestamp": "2026-02-05T12:00:00.000Z"
+        }
+      ],
+      "wins": 3,
+      "losses": 2,
+      "winRate": 60,
+      "totalReturn": -6.367515877351411,
+      "profitFactor": 0.49380463275443354,
+      "avgHold": 8.8,
+      "skippedSignals": 0
+    }
+  ]
+}
