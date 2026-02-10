@@ -6,14 +6,17 @@ cd "$(dirname "$0")"
 # Create logs directory
 mkdir -p logs
 
-# Export Telegram token if available
-export TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN:-8452626077:AAG6bvVmKc2OPYHji1S1opsm0ywqRPO6Ybk}"
+# Telegram token MUST be set in environment
+if [ -z "$TELEGRAM_BOT_TOKEN" ]; then
+    echo "⚠️  Warning: TELEGRAM_BOT_TOKEN not set"
+    echo "    Telegram alerts will be queued to logs/telegram-queue.jsonl"
+fi
 
 echo "🚀 Starting Solana Trading Bot Daemon..."
 echo "📊 Market scans: every 20s"
 echo "📈 Position checks: every 10s"
 echo "💓 Heartbeat: every 5min"
-echo "📱 Telegram alerts: enabled"
+echo "📱 Telegram alerts: ${TELEGRAM_BOT_TOKEN:+enabled}${TELEGRAM_BOT_TOKEN:-queued to file}"
 echo "────────────────────────────────────────"
 
 # Start daemon in background
