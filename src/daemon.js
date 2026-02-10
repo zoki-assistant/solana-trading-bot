@@ -227,7 +227,7 @@ class TradingDaemon {
     await this.checkBalance();
 
     // Main loops
-    const marketInterval = setInterval(() => this.scanMarkets(), 20000); // 20s
+    const marketInterval = setInterval(() => this.scanMarkets(), 60000); // 60s (CoinGecko rate limit)
     const positionInterval = setInterval(() => this.checkPositions(), 10000); // 10s
     const heartbeatInterval = setInterval(() => this.writeHeartbeat(), 300000); // 5min
     const saveInterval = setInterval(() => this.saveState(), 60000); // 1min
